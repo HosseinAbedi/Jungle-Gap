@@ -27,7 +27,7 @@ const AdvantageBadge = ({ type }: { type: 'me' | 'enemy' | 'even' }) => {
   );
 };
 
-const SectionCard = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
+const SectionCard = ({ children, className = "", delay = 0 }: { children?: React.ReactNode, className?: string, delay?: number }) => (
     <div 
         className={`bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-xl p-6 hover:border-slate-600 transition-all duration-500 hover:shadow-lg hover:shadow-cyan-900/5 group relative overflow-hidden animate-in fade-in slide-in-from-bottom-4 fill-mode-both ${className}`}
         style={{ animationDelay: `${delay}ms` }}
