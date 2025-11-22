@@ -48,10 +48,18 @@ const CHAMPION_NAMES = [
 
 export const CHAMPIONS: Champion[] = CHAMPION_NAMES.map(name => {
   const id = formatForUrl(name);
+  
+  let image = `https://ddragon.leagueoflegends.com/cdn/14.3.1/img/champion/${id}.png`;
+
+  // Special override for Zaahen since it doesn't exist in DDragon
+  if (name === "Zaahen") {
+    image = "https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/548.png"; // Void themed icon
+  }
+
   return {
     id,
     name,
-    image: `https://ddragon.leagueoflegends.com/cdn/14.3.1/img/champion/${id}.png`
+    image
   };
 });
 
