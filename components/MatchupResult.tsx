@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MatchupAdvice } from '../types';
 
 interface MatchupResultProps {
@@ -62,6 +62,31 @@ const InvadeRadar = ({ decision, explanation }: { decision: 'invade' | 'defend' 
 };
 
 export const MatchupResult: React.FC<MatchupResultProps> = ({ advice, loading }) => {
+  const [loadingState, setLoadingState] = useState({
+    main: "Consulting the Oracle",
+    sub: "Connecting to the Void..."
+  });
+
+  useEffect(() => {
+    if (!loading) return;
+
+    const phrases = [
+      { main: "Consulting the Oracle", sub: "Connecting to the Void..." },
+      { main: "Analyzing Patch Data", sub: "Scouring Season 15 Changes..." },
+      { main: "Synthesizing Strategy", sub: "Calculating Win Conditions..." },
+      { main: "Scouting Enemy Jungle", sub: "Tracking Pathing Routes..." },
+      { main: "Optimizing Build Path", sub: "Simulating Item Spikes..." }
+    ];
+
+    let index = 0;
+    const interval = setInterval(() => {
+      index = (index + 1) % phrases.length;
+      setLoadingState(phrases[index]);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [loading]);
+
   if (loading) {
     return (
       <div className="w-full max-w-6xl mx-auto mt-8 h-96 relative flex flex-col items-center justify-center overflow-hidden rounded-2xl bg-slate-900/50 backdrop-blur border border-slate-800">
@@ -77,9 +102,9 @@ export const MatchupResult: React.FC<MatchupResultProps> = ({ advice, loading })
                 <div className="absolute inset-0 rounded-full border-t-2 border-cyan-500 animate-spin"></div>
                 <div className="absolute inset-2 rounded-full border-b-2 border-amber-500 animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
             </div>
-            <div className="flex flex-col items-center gap-2">
-                 <h2 className="text-xl font-bold text-white tracking-widest uppercase animate-pulse">Analyzing Matchup</h2>
-                 <p className="text-xs text-cyan-400/70 font-mono uppercase tracking-[0.2em]">Scouring Season 15 Data...</p>
+            <div className="flex flex-col items-center gap-2 min-h-[60px]">
+                 <h2 key={loadingState.main} className="text-xl font-bold text-white tracking-widest uppercase animate-pulse">{loadingState.main}</h2>
+                 <p key={loadingState.sub} className="text-xs text-cyan-400/70 font-mono uppercase tracking-[0.2em]">{loadingState.sub}</p>
             </div>
         </div>
       </div>
