@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChampionSelector } from './components/ChampionSelector';
 import { MatchupResult } from './components/MatchupResult';
+import { Logo } from './components/Logo';
 import { getMatchupAdvice } from './services/geminiService';
 import { Champion, MatchupAdvice } from './types';
 
@@ -38,7 +39,8 @@ const App: React.FC = () => {
 
       <div className="relative z-10 container mx-auto px-4 py-12">
         {/* Header */}
-        <header className="text-center mb-12">
+        <header className="text-center mb-12 flex flex-col items-center">
+          <Logo className="w-24 h-24 mb-4 drop-shadow-[0_0_15px_rgba(251,191,36,0.2)] animate-in zoom-in duration-1000" />
           <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-amber-300 to-amber-600 tracking-tight lol-header drop-shadow-sm">
             JUNGLE GAP
           </h1>
@@ -97,7 +99,6 @@ const App: React.FC = () => {
            )}
 
           {/* Results */}
-          {/* Fixed type error by passing advice directly; MatchupResult accepts MatchupAdvice | null */}
           {(advice || loading) && (
               <MatchupResult advice={advice} loading={loading} />
           )}
