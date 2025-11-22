@@ -43,18 +43,13 @@ const CHAMPION_NAMES = [
   "Shaco", "Shen", "Shyvana", "Singed", "Sion", "Skarner", "Sylas", "Taliyah", 
   "Talon", "Taric", "Teemo", "Trundle", "Tryndamere", "Twitch", "Udyr", "Urgot", 
   "Vi", "Viego", "Volibear", "Warwick", "Wukong", "Xin Zhao", "Yorick", 
-  "Zaahen", "Zac", "Zed", "Zyra"
+  "Zac", "Zed", "Zyra"
 ];
 
 export const CHAMPIONS: Champion[] = CHAMPION_NAMES.map(name => {
   const id = formatForUrl(name);
   
   let image = `https://ddragon.leagueoflegends.com/cdn/14.3.1/img/champion/${id}.png`;
-
-  // Special override for Zaahen since it doesn't exist in DDragon
-  if (name === "Zaahen") {
-    image = "https://ddragon.leagueoflegends.com/cdn/14.3.1/img/profileicon/548.png"; // Void themed icon
-  }
 
   return {
     id,
